@@ -1,7 +1,6 @@
 #include <vector>
 #include <bits/stdc++.h>
 #include "Balde.h"
-
 using namespace std;
 
 class Diretorio {
@@ -11,14 +10,18 @@ class Diretorio {
     public:
         //Diretorio(int profundidadeGlobal, int tamanhoBalde);
         Diretorio(int tamanhoBalde);
+        Diretorio(int tamanhoBalde, int profundidadeGlobal);
         ~Diretorio();
-        void inserePseudoChave();
+        int retornaIndexCorrespondenteBitsBinarios(string pseudoChave);
+        void inserePseudoChave(string pseudoChave);
         void buscaPseudoChave();
         void divideBalde();
         void duplicaDiretorio();
         int getProfundidadeGlobal();
         int getTamanhoBalde();
-        
+
+        void imprime();
+
 };
 
 // profundidade de um diretorio eh

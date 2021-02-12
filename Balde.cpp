@@ -1,7 +1,7 @@
-#include "Balde.h"
 using namespace std;
 #include <vector>
 #include <bits/stdc++.h>
+#include "Balde.h"
 
 Balde::Balde(int tamanhoBalde){
     profundidadeLocal =0;
@@ -46,6 +46,16 @@ bool Balde::baldeVazio(){
 
 int Balde::getProfundidadeLocal(){
     return profundidadeLocal;
+}
+
+int Balde::getTamanhoBalde(){
+    return tamanhoBalde;
+}
+
+void Balde::imprimePseudoChaves(){
+    for(int i=0 ; i<vectorPseudoChaves.size();i++)
+        cout<< vectorPseudoChaves[i]<<"  ";
+    cout<<endl;
 }
 
 bool Balde::buscaPseudoChave(string pseudoChave){

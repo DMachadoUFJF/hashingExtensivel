@@ -1,10 +1,24 @@
 #include <vector>
 #include <bits/stdc++.h>
-#include "Balde.h"
 #include "Diretorio.h"
-
+#include <math.h>
 using namespace std;
+//https://docs.google.com/presentation/d/1rgl-fr2U4BchA0jvzAIKGDd4TIHs0oG1sDiRyRWvA0I/edit#slide=id.p
+//https://drive.google.com/file/d/15-gaXgaz3pTXRowB2l1i1ULAArs073-4/view
+//https://drive.google.com/file/d/1Cu_VzGIe3ah8cGCmGsMuAkhbAupFDRS0/view
+//https://drive.google.com/file/d/1UWuFtfD2f-UcBhmdXVqaPjjuM8ItLloo/view
+//https://www.geeksforgeeks.org/extendible-hashing-dynamic-approach-to-dbms/
+//https://docs.google.com/document/d/1gmufpr5l0PCeUNyvU7InmNvR9C4wgoGNcAhZBYL0zSY/edit#
 
+bool temStringRepetida(string item, vector<string> vetor)
+{
+    for (int x = 0; x < vetor.size(); x++)
+    {
+        if (vetor[x] == item)
+            return true;
+    }
+    return false;
+}
 
 string retornaPseudoChaveAleatoria(int numeroBits){
     unsigned int seed = (std::chrono::system_clock::now().time_since_epoch().count())/1000;
@@ -17,33 +31,41 @@ string retornaPseudoChaveAleatoria(int numeroBits){
     return pseudoChave;
 }
 
+vector<string> fazVectorPCA(int quantidadePseudoChaves, int numeroBits)
+{
+    vector<string> vectorPca;
+    string pseudoChave;
+    for(int i=0 ; i<quantidadePseudoChaves ; i++){
+        pseudoChave = retornaPseudoChaveAleatoria(numeroBits);
+        if(temStringRepetida(pseudoChave,vectorPca)){
+            i--;
+        }
+        else{
+            vectorPca.push_back(pseudoChave);
+        }
+    }
+    return vectorPca;
+}
+
 int main()
 {
-    int tamanhoBalde,numeroBits;
+    int tamanhoBalde,numeroBits,quantidadeDePseudoChaves;
     cout << "Digite o tamanho do balde : "<<endl; //
     cin >> tamanhoBalde;
     cout << "Digite o numero de bits a ser usado para as pseudo-chaves : "<<endl;
     cin >> numeroBits;
-    Diretorio dir(tamanhoBalde);
-    // string x = retornaPseudoChaveAleatoria(numeroBits);
-    // bucketzada.inserePseudoChave(x);
-    // bucketzada.removePseudoChave(x);
-    // bucketzada.inserePseudoChave(retornaPseudoChaveAleatoria(numeroBits));
-    // bucketzada.inserePseudoChave(retornaPseudoChaveAleatoria(numeroBits));
+    cout << "Digite a quantidade de pseudo-chaves que quer gerar"<<endl;
+    cout<<"(escolher um numero menor ou igual a "<<pow(2,numeroBits)<<" )  :"<<endl;
+    cin >> quantidadeDePseudoChaves;
 
+    Diretorio dir(tamanhoBalde);
+    vector<string> pseudoChaves = fazVectorPCA(quantidadeDePseudoChaves,numeroBits);
+    for(int i=0 ; i<pseudoChaves.size() ; i++)
+        dir.inserePseudoChave(pseudoChaves[i]);
+    dir.imprime();
     
     return 0;
 }
-
-
-// A função principal deve solicitar ao usuário o tamanho M a ser usado 
-// para os baldes e o número de bits B a ser usado para as pseudo-chaves.
-
-// RANDOMIZA B NUMEROS DE 0 A 100 E FAZ RESTO 2 PRA FORMAR UMA 
-// PSEUDO CHAVE EM FORMA DE STRING , CONCATENANDO OS B NUMEROS RANDOMIZADOS
-
-
-
 // 1) Implementar um tipo abstrato de dados Balde que permita armazenar pseudo-chaves. Utilize o tipo string para representá-las.
 
 // 2) Implementar um tipo abstrato de dados Diretório para armazenar o conjunto de baldes. Esse tipo de dados 

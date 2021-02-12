@@ -1,6 +1,5 @@
 #include <vector>
 #include <bits/stdc++.h>
-
 using namespace std;
 
 class Balde
@@ -13,12 +12,14 @@ public:
     Balde(int tamanhoBalde);
     Balde(int tamanhoBalde, int profundidadeLocal);
     ~Balde();
+    int getTamanhoBalde();
     int getProfundidadeLocal();
     void inserePseudoChave(string pseudoChave); 
     int removePseudoChave(string pseudoChave);
     bool baldeCheio();
     bool baldeVazio();
     bool buscaPseudoChave(string pseudoChave);
+    void imprimePseudoChaves();
        
         //void search(int key);
         // int update(int key, string value);
