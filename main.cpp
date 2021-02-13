@@ -68,6 +68,9 @@ int main()
     Diretorio dir(tamanhoBalde);
     vector<string> pseudoChaves = fazVectorPCA(quantidadeDePseudoChaves,numeroBits);
     for(int i=0 ; i<pseudoChaves.size() ; i++)
+        cout << pseudoChaves[i]<< " ";
+    cout<<endl;
+    for(int i=0 ; i<pseudoChaves.size() ; i++)
         dir.inserePseudoChave(pseudoChaves[i]);
     dir.imprime();
 
