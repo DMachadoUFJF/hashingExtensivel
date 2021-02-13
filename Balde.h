@@ -1,6 +1,12 @@
 #include <vector>
-#include <bits/stdc++.h>
-using namespace std;
+#include <string>
+#include <iostream>
+using std::cout;
+using std::cin;
+using std::endl;
+using std::string;
+using std::vector;
+using std::to_string;
 
 class Balde
 {

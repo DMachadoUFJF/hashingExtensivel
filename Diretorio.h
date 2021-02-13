@@ -1,14 +1,19 @@
 #include <vector>
-#include <bits/stdc++.h>
+#include <string>
+#include <iostream>
 #include "Balde.h"
-using namespace std;
+using std::cout;
+using std::cin;
+using std::endl;
+using std::string;
+using std::vector;
+using std::to_string;
 
 class Diretorio {
     private:
         int profundidadeGlobal , tamanhoBalde;
         vector<Balde*> vectorBaldes;
     public:
-        //Diretorio(int profundidadeGlobal, int tamanhoBalde);
         Diretorio(int tamanhoBalde);
         Diretorio(int tamanhoBalde, int profundidadeGlobal);
         ~Diretorio();

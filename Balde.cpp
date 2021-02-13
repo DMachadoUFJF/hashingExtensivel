@@ -1,7 +1,13 @@
-using namespace std;
+#include <iostream>
 #include <vector>
-#include <bits/stdc++.h>
+#include <string>
 #include "Balde.h"
+using std::cout;
+using std::cin;
+using std::endl;
+using std::string;
+using std::vector;
+using std::to_string;
 
 Balde::Balde(int tamanhoBalde){
     profundidadeLocal =0;

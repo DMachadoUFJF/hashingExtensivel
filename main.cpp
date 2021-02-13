@@ -1,8 +1,15 @@
 #include <vector>
-#include <bits/stdc++.h>
+#include <string>
+#include <iostream>
 #include "Diretorio.h"
 #include <math.h>
-using namespace std;
+using std::cout;
+using std::cin;
+using std::endl;
+using std::string;
+using std::vector;
+using std::to_string;
+
 //https://docs.google.com/presentation/d/1rgl-fr2U4BchA0jvzAIKGDd4TIHs0oG1sDiRyRWvA0I/edit#slide=id.p
 //https://drive.google.com/file/d/15-gaXgaz3pTXRowB2l1i1ULAArs073-4/view
 //https://drive.google.com/file/d/1Cu_VzGIe3ah8cGCmGsMuAkhbAupFDRS0/view
@@ -66,6 +73,8 @@ int main()
     
     return 0;
 }
+
+//  g++ -o hash -O3 *.cpp
 // 1) Implementar um tipo abstrato de dados Balde que permita armazenar pseudo-chaves. Utilize o tipo string para representá-las.
 
 // 2) Implementar um tipo abstrato de dados Diretório para armazenar o conjunto de baldes. Esse tipo de dados 

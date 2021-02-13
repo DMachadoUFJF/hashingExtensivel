@@ -1,38 +1,31 @@
-using namespace std;
 #include <vector>
-#include <bits/stdc++.h>
+#include <string>
+#include <iostream>
 #include "Diretorio.h"
-
+using std::cout;
+using std::cin;
+using std::endl;
+using std::string;
+using std::vector;
+using std::to_string;
 
 Diretorio::Diretorio(int tamanhoBalde){
     this->profundidadeGlobal = 1;
     this->tamanhoBalde = tamanhoBalde;
-       
-    vectorBaldes.push_back(new Balde(tamanhoBalde));
-    vectorBaldes.push_back(*vectorBaldes.begin());
-        
+    Balde* novoBalde = new Balde(tamanhoBalde);
+    for (int i = 0; i < 1 << profundidadeGlobal; i++) // 1 * 2^profundidadeGlobal
+        vectorBaldes.push_back(novoBalde); //vai criar um diretorio com 2 ponteiros pra 1 balde
 }
 
 Diretorio::Diretorio(int tamanhoBalde, int profundidadeGlobal){
-    // if(profundidadeGlobal == 1){
-    //     Diretorio(tamanhoBalde);
-    // }
-    // else{
-
     this->profundidadeGlobal = profundidadeGlobal;
     this->tamanhoBalde = tamanhoBalde;
-
-    for(int i=0 ; i < 1 << profundidadeGlobal ; i++) // 1 * 2^profundidadeGlobal
-        vectorBaldes.push_back(new Balde(tamanhoBalde));
-
-
-
-    //}
+    Balde* novoBalde = new Balde(tamanhoBalde);
+    for (int i = 0; i < 1 << profundidadeGlobal; i++) // 1 * 2^profundidadeGlobal
+        vectorBaldes.push_back(novoBalde);
 }
 
-Diretorio::~Diretorio(){
-    delete &vectorBaldes;
-}
+Diretorio::~Diretorio(){}
 
 int Diretorio::retornaIndexCorrespondenteBitsBinarios(string pseudoChave){
     // a profundidadeGlobal eh igual ao numero de bits da pseudoChave que precisa ser usado para identificar o balde correto
@@ -75,6 +68,7 @@ int Diretorio::getTamanhoBalde(){
 void Diretorio::imprime(){
     // o diretorio tem 2^profundidadeGlobal posicoes
     cout << "Profundidade Global do diretorio : "<< getProfundidadeGlobal() << endl;
+    cout << "Endereco do vectorBaldes : " << &vectorBaldes<<endl;
     for(int i=0 ; i < 1 << getProfundidadeGlobal() ; i++){
         cout <<"Posicao do diretorio : "<< i << " , tem o conteudo : "<<vectorBaldes[i]<<
         ", com as chaves : ";
