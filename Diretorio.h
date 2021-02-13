@@ -17,14 +17,15 @@ class Diretorio {
         Diretorio(int tamanhoBalde);
         Diretorio(int tamanhoBalde, int profundidadeGlobal);
         ~Diretorio();
-        int retornaIndexCorrespondenteBitsBinarios(string pseudoChave);
+        int retornaIndexInteiroCorrespondenteBitsBinarios(string pseudoChave);
         void inserePseudoChave(string pseudoChave);
-        void buscaPseudoChave();
-        void divideBalde();
+        void divideBalde(int indexBalde, string pseudoChaveRestante);
+
+
         void duplicaDiretorio();
+        void buscaPseudoChave();
         int getProfundidadeGlobal();
         int getTamanhoBalde();
-
         void imprime();
 
 };

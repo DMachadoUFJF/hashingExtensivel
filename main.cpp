@@ -70,6 +70,9 @@ int main()
     for(int i=0 ; i<pseudoChaves.size() ; i++)
         dir.inserePseudoChave(pseudoChaves[i]);
     dir.imprime();
+
+
+
     
     return 0;
 }

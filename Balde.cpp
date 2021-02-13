@@ -74,3 +74,7 @@ bool Balde::buscaPseudoChave(string pseudoChave){
     cout<<"Esta chave nao foi encontrada."<<endl;
     return false;
 }
+
+string Balde::getPseudoChave(int indexPosicaoDoBalde){
+    return vectorPseudoChaves[indexPosicaoDoBalde];
+}

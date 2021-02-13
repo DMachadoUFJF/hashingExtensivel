@@ -26,6 +26,7 @@ public:
     bool baldeVazio();
     bool buscaPseudoChave(string pseudoChave);
     void imprimePseudoChaves();
+    string getPseudoChave(int indexPosicaoDoBalde);
        
         //void search(int key);
         // int update(int key, string value);
