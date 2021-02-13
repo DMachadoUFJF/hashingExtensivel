@@ -21,7 +21,7 @@ Balde::Balde(int tamanhoBalde, int profundidadeLocal){
 
 Balde::~Balde(){}
     
-void Balde::inserePseudoChave(string pseudoChave){
+void Balde::inserePseudoChaveNoBalde(string pseudoChave){
     vectorPseudoChaves.push_back(pseudoChave);
     cout<<pseudoChave<<" inserido com sucesso"<<endl;
 }
@@ -77,4 +77,12 @@ bool Balde::buscaPseudoChave(string pseudoChave){
 
 string Balde::getPseudoChave(int indexPosicaoDoBalde){
     return vectorPseudoChaves[indexPosicaoDoBalde];
+}
+
+void Balde::clearBalde(){
+    vectorPseudoChaves.clear();
+}
+
+void Balde::aumentaProfundidadeLocal(){
+    profundidadeLocal++;
 }

@@ -20,13 +20,15 @@ public:
     ~Balde();
     int getTamanhoBalde();
     int getProfundidadeLocal();
-    void inserePseudoChave(string pseudoChave); 
+    void inserePseudoChaveNoBalde(string pseudoChave); 
     int removePseudoChave(string pseudoChave);
     bool baldeCheio();
     bool baldeVazio();
     bool buscaPseudoChave(string pseudoChave);
     void imprimePseudoChaves();
     string getPseudoChave(int indexPosicaoDoBalde);
+    void clearBalde();
+    void aumentaProfundidadeLocal();
        
         //void search(int key);
         // int update(int key, string value);

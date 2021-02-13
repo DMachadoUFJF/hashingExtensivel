@@ -19,10 +19,10 @@ class Diretorio {
         ~Diretorio();
         int retornaIndexInteiroCorrespondenteBitsBinarios(string pseudoChave);
         void inserePseudoChave(string pseudoChave);
-        void divideBalde(int indexBalde, string pseudoChaveRestante);
-
-
+        void divideBalde(int indexBalde, string pseudoChave);
         void duplicaDiretorio();
+
+        
         void buscaPseudoChave();
         int getProfundidadeGlobal();
         int getTamanhoBalde();
