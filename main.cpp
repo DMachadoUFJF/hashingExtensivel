@@ -28,10 +28,10 @@ bool temStringRepetida(string item, vector<string> vetor)
 }
 
 string retornaPseudoChaveAleatoria(int numeroBits){
-    unsigned int seed = (std::chrono::system_clock::now().time_since_epoch().count())/1000;
+    unsigned int seed = (std::chrono::system_clock::now().time_since_epoch().count())/130;
     string pseudoChave;
     for(int i=0;i<numeroBits;i++){
-        seed = (std::chrono::system_clock::now().time_since_epoch().count())/1000;
+        seed = (std::chrono::system_clock::now().time_since_epoch().count())/72;
         srand (seed+i);
         pseudoChave = pseudoChave + to_string(rand()%2);
     }

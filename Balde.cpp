@@ -12,11 +12,13 @@ using std::to_string;
 Balde::Balde(int tamanhoBalde){
     profundidadeLocal =0;
     this->tamanhoBalde = tamanhoBalde;
+    this->bitsIniciais = "";
 }
 
 Balde::Balde(int tamanhoBalde, int profundidadeLocal){
     this->profundidadeLocal =profundidadeLocal;
     this->tamanhoBalde = tamanhoBalde;
+    this->bitsIniciais = "";
 }
 
 Balde::~Balde(){}
@@ -85,4 +87,12 @@ void Balde::clearBalde(){
 
 void Balde::aumentaProfundidadeLocal(){
     profundidadeLocal++;
+}
+
+string Balde::getBitsIniciais(){
+    return bitsIniciais;
+}
+
+void Balde::setBitsIniciais(string str){
+    this->bitsIniciais = str;
 }

@@ -59,60 +59,59 @@ void Diretorio::inserePseudoChave(string pseudoChave)
             //duplica o tamanho do diretório
             duplicaDiretorio();
         }
-        vector<string> pcArmazenadas;
-        for (int i = 0; i < tamanhoBalde; i++)
-        {
-            pcArmazenadas.push_back(vectorBaldes[indexBalde]->getPseudoChave(i));
-        }
+        
         divideBalde(indexBalde,pseudoChave);
-        for (int i = 0; i < pcArmazenadas.size(); i++){
-            inserePseudoChave(pcArmazenadas[i]);
-        }
-        cout << "pseudoChave que causou OverFlow : " << pseudoChave<<endl;
         inserePseudoChave(pseudoChave);
     }
 }
 
+string Diretorio::toBinary(int n,int numBits)
+{
+    string r;
+    for(int i=0 ; i<numBits ; i++){
+        r += ( n % 2 == 0 ? "0" : "1" );
+        n /= 2;
+    }
+    reverse(r.begin(),r.end());
+    return r;
+}
+
 void Diretorio::divideBalde(int indexBalde, string pseudoChave)
-{                                               // vectorBaldes[indexBalde] -> será o balde a ser "dividido"
+{   // vectorBaldes[indexBalde] -> será o balde a ser "dividido"
     Balde *baldeCopia = new Balde(tamanhoBalde, (vectorBaldes[indexBalde]->getProfundidadeLocal()+1));
     Balde *baldeNovo = new Balde(tamanhoBalde, (vectorBaldes[indexBalde]->getProfundidadeLocal()+1));
-    cout << " endereco do balde que deu overflow : "<< vectorBaldes[indexBalde]<<endl;
-    vectorBaldes[indexBalde]=baldeCopia;
-    string binario = pseudoChave.substr(0, profundidadeGlobal);
-    if(*binario.end() == '1')
-        *binario.end() = '0';
-    else *binario.end() = '1';
-    int indexBaldeNovo = retornaIndexInteiroCorrespondenteBitsBinarios(binario);
-    vectorBaldes[indexBaldeNovo] = baldeNovo;
+    baldeCopia->setBitsIniciais(vectorBaldes[indexBalde]->getBitsIniciais());
+    //cout << " endereco do balde que deu overflow : "<< vectorBaldes[indexBalde]<<endl;
+    //insere uma pseudoChave que estava no balde que deu overflow pra tomar ela como parametro de bitsIniciais pro baldeCopia
+    baldeCopia->inserePseudoChaveNoBalde(vectorBaldes[indexBalde]->getPseudoChave(0));
+    //profundidade local é a quantidade de bits que precisa na string bitsIniciais
+    baldeCopia->setBitsIniciais(baldeCopia->getPseudoChave(0).substr(0,baldeCopia->getProfundidadeLocal()));
+    for(int i=1 ; i<tamanhoBalde ; i++){ //distribui as chaves que estavam faltando dentro do vectorBaldes[indexBalde]
+        if(vectorBaldes[indexBalde]->getPseudoChave(i).empty())
+            break;
+        if(baldeCopia->getBitsIniciais() == vectorBaldes[indexBalde]->getPseudoChave(i).substr(0,baldeCopia->getProfundidadeLocal()))
+            baldeCopia->inserePseudoChaveNoBalde(vectorBaldes[indexBalde]->getPseudoChave(i));
+        else baldeNovo->inserePseudoChaveNoBalde(vectorBaldes[indexBalde]->getPseudoChave(i));//-> baldeNovo pode ficar vazio
+    }
+    delete vectorBaldes[indexBalde];
+
+    if(baldeNovo->baldeVazio()) //Ajustando bitsIniciais do baldeNovo
+        baldeNovo->setBitsIniciais("");
+    else baldeNovo->setBitsIniciais(baldeNovo->getPseudoChave(0).substr(0, baldeNovo->getProfundidadeLocal()));
+    
+    for(int i=0 ; i<vectorBaldes.size() ; i++){ // Ajusta ponteiros do diretório
+        string bitsIniciaisDiretorio = toBinary(i,profundidadeGlobal).substr(0,baldeCopia->getProfundidadeLocal());
+        if(bitsIniciaisDiretorio == baldeCopia->getBitsIniciais())
+            vectorBaldes[i]=baldeCopia;
+        else if(bitsIniciaisDiretorio == baldeNovo->getBitsIniciais()){
+            vectorBaldes[i]=baldeNovo;
+            cout<<vectorBaldes[i]<<" eh o balde novo"<<endl;
+        }
+    }
 }
 
 void Diretorio::duplicaDiretorio(){
-    
-    profundidadeGlobal++;
-
-    vector<Balde*> novosBaldes;
-
-    for (int i = 0; i < pow(2, profundidadeGlobal); i++)
-    {
-        novosBaldes.push_back(nullptr);
-    }
-
-    for (unsigned int i = 0; i < vectorBaldes.size(); i++)
-    {
-        if(i!=1)
-        {
-            novosBaldes[i*i] = vectorBaldes[i];
-            novosBaldes[(i*i)+1] = vectorBaldes[i];
-        }
-        else
-        {
-            novosBaldes[2] = vectorBaldes[1];
-            novosBaldes[3] = vectorBaldes[1];
-        }
-    }
-    vectorBaldes = novosBaldes;
-        
+    cout<<"SE CHEGOU AQUI EH PQ DEU MERDA";
 }
 
 void Diretorio::imprime()

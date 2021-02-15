@@ -12,6 +12,7 @@ class Balde
 {
 private:
     vector<string> vectorPseudoChaves;
+    string bitsIniciais;
     int profundidadeLocal , tamanhoBalde; // profundidade local = numero de bits que todas as pseudochaves de um balde tem em comum
 
 public:
@@ -20,6 +21,8 @@ public:
     ~Balde();
     int getTamanhoBalde();
     int getProfundidadeLocal();
+    string getBitsIniciais();
+    void setBitsIniciais(string str);
     void inserePseudoChaveNoBalde(string pseudoChave); 
     int removePseudoChave(string pseudoChave);
     bool baldeCheio();
@@ -30,14 +33,6 @@ public:
     void clearBalde();
     void aumentaProfundidadeLocal();
        
-        //void search(int key);
-        // int update(int key, string value);
-        // void search(int key);
-        // int increaseDepth(void);
-        // int decreaseDepth(void);
-        // std::map<int, string> copy(void);
-        // void clear(void);
-        // void display(void);
 };
 
 

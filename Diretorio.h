@@ -18,6 +18,7 @@ class Diretorio {
         Diretorio(int tamanhoBalde, int profundidadeGlobal);
         ~Diretorio();
         int retornaIndexInteiroCorrespondenteBitsBinarios(string pseudoChave);
+        string toBinary(int n,int numBits);
         void inserePseudoChave(string pseudoChave);
         void divideBalde(int indexBalde, string pseudoChave);
         void duplicaDiretorio();
