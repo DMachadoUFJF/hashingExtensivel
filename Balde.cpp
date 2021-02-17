@@ -13,31 +13,21 @@ Balde::Balde(int tamanhoBalde){
     profundidadeLocal =0;
     this->tamanhoBalde = tamanhoBalde;
     this->bitsIniciais = "";
+    this->numeroDePseudoChavesNoBalde = 0;
 }
 
 Balde::Balde(int tamanhoBalde, int profundidadeLocal){
-    this->profundidadeLocal =profundidadeLocal;
     this->tamanhoBalde = tamanhoBalde;
+    this->profundidadeLocal = profundidadeLocal;
     this->bitsIniciais = "";
+    this->numeroDePseudoChavesNoBalde = 0;
 }
 
-Balde::~Balde(){}
-    
+Balde::~Balde() {}
+
 void Balde::inserePseudoChaveNoBalde(string pseudoChave){
-    vectorPseudoChaves.push_back(pseudoChave);
-    cout<<pseudoChave<<" inserido com sucesso"<<endl;
-}
-
-int Balde::removePseudoChave(string pseudoChave){
-    for(int i =0 ; i<vectorPseudoChaves.size();i++){
-        if(vectorPseudoChaves[i] == pseudoChave){
-            vectorPseudoChaves[i].erase();
-            cout<<pseudoChave<<" removida com sucesso"<<endl;
-            return 1;
-        }
-    }
-    cout<<"Esta chave nao foi encontrada,portanto nao foi removida."<<endl;
-    return 0;
+    this->vectorPseudoChaves.push_back(pseudoChave);
+    this->numeroDePseudoChavesNoBalde += 1;
 }
 
 bool Balde::baldeCheio(){
@@ -46,53 +36,27 @@ bool Balde::baldeCheio(){
     else return false;
 }
 
-bool Balde::baldeVazio(){
-    if(vectorPseudoChaves.size() == 0)
-        return true;
-    else return false;
-}
-
 int Balde::getProfundidadeLocal(){
-    return profundidadeLocal;
+    return this->profundidadeLocal;
 }
 
-int Balde::getTamanhoBalde(){
-    return tamanhoBalde;
-}
-
-void Balde::imprimePseudoChaves(){
-    for(int i=0 ; i<vectorPseudoChaves.size();i++)
-        cout<< vectorPseudoChaves[i]<<"  ";
-    cout<<endl;
-}
-
-bool Balde::buscaPseudoChave(string pseudoChave){
-    for(int i =0 ; i<vectorPseudoChaves.size();i++){
-        if(vectorPseudoChaves[i] == pseudoChave){
-            cout<<pseudoChave<<" encontrada com sucesso"<<endl;
-            return true;
-        }
-    }
-    cout<<"Esta chave nao foi encontrada."<<endl;
-    return false;
-}
-
-string Balde::getPseudoChave(int indexPosicaoDoBalde){
-    return vectorPseudoChaves[indexPosicaoDoBalde];
-}
-
-void Balde::clearBalde(){
-    vectorPseudoChaves.clear();
+string Balde::getPseudoChave(int indice){
+    return this->vectorPseudoChaves[indice];
 }
 
 void Balde::aumentaProfundidadeLocal(){
-    profundidadeLocal++;
+    this->profundidadeLocal = this->profundidadeLocal + 1;
 }
 
 string Balde::getBitsIniciais(){
-    return bitsIniciais;
+    return this->bitsIniciais;
 }
 
-void Balde::setBitsIniciais(string str){
-    this->bitsIniciais = str;
+void Balde::setBitsIniciais(string bitsIniciais){
+    this->bitsIniciais = bitsIniciais;
 }
+
+int Balde::getNumeroDePseudoChavesNoBalde(){
+    return this->numeroDePseudoChavesNoBalde;
+}
+

@@ -1,3 +1,5 @@
+#ifndef DIRETORIO_H
+#define DIRETORIO_H
 #include <vector>
 #include <string>
 #include <iostream>
@@ -10,24 +12,23 @@ using std::vector;
 using std::to_string;
 
 class Diretorio {
-    private:
-        int profundidadeGlobal , tamanhoBalde;
-        vector<Balde*> vectorBaldes;
-    public:
-        Diretorio(int tamanhoBalde);
-        Diretorio(int tamanhoBalde, int profundidadeGlobal);
-        ~Diretorio();
-        int retornaIndexInteiroCorrespondenteBitsBinarios(string pseudoChave);
-        string toBinary(int n,int numBits);
-        void inserePseudoChave(string pseudoChave);
-        void divideBalde(int indexBalde, string pseudoChave);
-        void duplicaDiretorio();
 
-        
-        void buscaPseudoChave();
-        int getProfundidadeGlobal();
-        int getTamanhoBalde();
-        void imprime();
+    private:
+    int profundidadeGlobal , tamanhoBalde;
+    vector<Balde*> vectorBaldes;
+
+    public:
+    Diretorio(int tamanhoBalde);
+    ~Diretorio();
+    int retornaIndexInteiroCorrespondenteBitsBinarios(string pseudoChave);
+    string toBinary(int numBits,int n);
+    void inserePseudoChave(string pseudoChave);
+    void divideBalde(Balde *balde, string pos);
+    void duplicarDiretorio(Balde *balde, string pos);
+    void buscaPseudoChave(string pseudoChave);
+    Balde getBalde(int indice);
+    int size();
+    void imprime();
 
 };
 
@@ -40,3 +41,5 @@ class Diretorio {
 //deve possuir operações para inserir, buscar, dividir baldes e duplicar diretório.
 
 //1 diretorio com 2 opcoes (0 e 1) e um balde
+
+#endif

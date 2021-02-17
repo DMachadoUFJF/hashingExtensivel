@@ -1,3 +1,5 @@
+#ifndef BALDE_H
+#define BALDE_H
 #include <vector>
 #include <string>
 #include <iostream>
@@ -13,27 +15,22 @@ class Balde
 private:
     vector<string> vectorPseudoChaves;
     string bitsIniciais;
-    int profundidadeLocal , tamanhoBalde; // profundidade local = numero de bits que todas as pseudochaves de um balde tem em comum
+    int profundidadeLocal , tamanhoBalde, numeroDePseudoChavesNoBalde; // profundidade local = numero de bits que todas as pseudochaves de um balde tem em comum
 
 public:
     Balde(int tamanhoBalde);
     Balde(int tamanhoBalde, int profundidadeLocal);
     ~Balde();
-    int getTamanhoBalde();
     int getProfundidadeLocal();
     string getBitsIniciais();
-    void setBitsIniciais(string str);
-    void inserePseudoChaveNoBalde(string pseudoChave); 
-    int removePseudoChave(string pseudoChave);
+    void setBitsIniciais(string bitsIniciais);
     bool baldeCheio();
-    bool baldeVazio();
-    bool buscaPseudoChave(string pseudoChave);
-    void imprimePseudoChaves();
-    string getPseudoChave(int indexPosicaoDoBalde);
-    void clearBalde();
+    void inserePseudoChaveNoBalde(string pseudoChave);
     void aumentaProfundidadeLocal();
-       
+    string getPseudoChave(int indexPosicaoDoBalde);
+    int getNumeroDePseudoChavesNoBalde();
+    
+    
 };
 
-
-// 1) Implementar um tipo abstrato de dados Balde que permita armazenar pseudo-chaves. Utilize o tipo string para representá-las.
+#endif

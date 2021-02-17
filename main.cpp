@@ -3,6 +3,9 @@
 #include <iostream>
 #include "Diretorio.h"
 #include <math.h>
+#include <time.h>
+#include <chrono>
+#include <algorithm>
 using std::cout;
 using std::cin;
 using std::endl;
@@ -54,44 +57,71 @@ vector<string> fazVectorPCA(int quantidadePseudoChaves, int numeroBits)
     return vectorPca;
 }
 
-int main()
+string randMesmoInicio(int numeroBits)
 {
-    int tamanhoBalde,numeroBits,quantidadeDePseudoChaves;
-    cout << "Digite o tamanho do balde : "<<endl; //
-    cin >> tamanhoBalde;
-    cout << "Digite o numero de bits a ser usado para as pseudo-chaves : "<<endl;
-    cin >> numeroBits;
-    cout << "Digite a quantidade de pseudo-chaves que quer gerar"<<endl;
-    cout<<"(escolher um numero menor ou igual a "<<pow(2,numeroBits)<<" )  :"<<endl;
-    cin >> quantidadeDePseudoChaves;
-
-    Diretorio dir(tamanhoBalde);
-    vector<string> pseudoChaves = fazVectorPCA(quantidadeDePseudoChaves,numeroBits);
-    for(int i=0 ; i<pseudoChaves.size() ; i++)
-        cout << pseudoChaves[i]<< " ";
-    cout<<endl;
-    for(int i=0 ; i<pseudoChaves.size() ; i++)
-        dir.inserePseudoChave(pseudoChaves[i]);
-    dir.imprime();
-
-
-
-    
-    return 0;
+    int x;
+    string pseudoChave = "01";
+    for (int i = 0; i < numeroBits-2; i++)
+    {
+        x = (rand() % 100)%2;
+        pseudoChave.append(to_string(x));
+    }
+    return pseudoChave;
 }
 
-//  g++ -o hash -O3 *.cpp
-// 1) Implementar um tipo abstrato de dados Balde que permita armazenar pseudo-chaves. Utilize o tipo string para representá-las.
+vector<string> fazVectorMesmoInicio(int quantidadePseudoChaves, int numeroBits)
+{
+    vector<string> vectorPca;
+    
+    for(int i=0 ; i<quantidadePseudoChaves ; i++){
+        string pseudoChave;
+        pseudoChave =randMesmoInicio(numeroBits);
+        if(temStringRepetida(pseudoChave,vectorPca)){
+            i--;
+        }
+        else{
+            vectorPca.push_back(pseudoChave);
+        }
+    }
+    return vectorPca;
+}
 
-// 2) Implementar um tipo abstrato de dados Diretório para armazenar o conjunto de baldes. Esse tipo de dados 
-//deve possuir operações para inserir, buscar, dividir baldes e duplicar diretório.
 
-// 3)A função principal deve solicitar ao usuário o tamanho M a ser usado para
-// os baldes e o número de bits B a ser usado para as pseudo-chaves.
+int main()
+{
+    int tamanhoBalde,numeroBits,opcao;
+    cout << "Digite 1 para 15 insercoes de pseudo-chaves aleatorias" << endl;
+    cout << "Digite 2 para 15 insercoes de pseudo-chaves iniciadas com 01" << endl;
+    cin >> opcao;
+    cout << "Digite o tamanho do balde : "<<endl;
+    cin >> tamanhoBalde;
+    cout << "Digite o numero de bits a ser usado para as pseudo-chaves : "<<endl;
+    if(opcao == 2)
+        cout<<"(escolha um numero >= 6, pois as 15 pseudo-chaves nao podem ser iguais) :"<<endl;
+    
+    cin >> numeroBits;
+    Diretorio dir(tamanhoBalde);
+     if(opcao == 1){
+        
+        vector<string> pseudoChaves = fazVectorPCA(15,numeroBits);
+        cout <<endl<<"Inserindo as seguintes pseudo-chaves: "<<endl;
+        for(int i=0 ; i<pseudoChaves.size() ; i++)
+            cout << pseudoChaves[i]<< " ";
+        cout<<endl;
+        for(int i=0 ; i<pseudoChaves.size() ; i++)
+            dir.inserePseudoChave(pseudoChaves[i]);
+     }else if(opcao == 2){
+         vector<string> pseudoChaves = fazVectorMesmoInicio(15,numeroBits);
+        cout <<endl<<"Inserindo as seguintes pseudo-chaves: "<<endl;
+        for(int i=0 ; i<pseudoChaves.size() ; i++)
+            cout << pseudoChaves[i]<< " ";
+        cout<<endl;
+        for(int i=0 ; i<pseudoChaves.size() ; i++)
+            dir.inserePseudoChave(pseudoChaves[i]);
 
-// 4)Devem ser realizados dois testes:
-// a)Inserções de N pseudo-chaves aleatórias
-// b)Inserções de N pseudo-chaves iniciadas com um mesmo padrão de bits
+     }else return 0;
 
-// 5) Analise os resultados dos testes com relação ao fator de carga da tabela e à ocupação de memória. Escolha N de
-// forma a permitir uma análise adequada. Compare os resultados obtidos com os dois testes e preencha o relatório da atividade.
+    dir.imprime();
+
+    return 0;
+}

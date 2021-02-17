@@ -53,7 +53,7 @@ void Diretorio::inserePseudoChave(string pseudoChave)
         else if (this->profundidadeGlobal > vectorBaldes[indexBalde]->getProfundidadeLocal())
         {
             //divide o balde
-            dividir(vectorBaldes[indexBalde], pseudoChave);
+            divideBalde(vectorBaldes[indexBalde], pseudoChave);
             inserePseudoChave(pseudoChave);
         }
     }
@@ -71,7 +71,7 @@ string Diretorio::toBinary(int numBits, int n)
     return r;
 }
 
-void Diretorio::dividir(Balde *baldeOriginal, string pos)
+void Diretorio::divideBalde(Balde *baldeOriginal, string pos)
 {
     baldeOriginal->aumentaProfundidadeLocal();
     Balde *baldeCopia = new Balde(tamanhoBalde, baldeOriginal->getProfundidadeLocal());
@@ -183,7 +183,27 @@ void Diretorio::duplicarDiretorio(Balde *baldeOriginal, string pos)
 
 void Diretorio::imprime()
 {
-    
+    for (int i = 0; i < vectorBaldes.size(); i++)
+    {
+        cout << "Bits binarios do balde : " << vectorBaldes[i]->getBitsIniciais() << endl;
+        cout << "Profundidade Local : " << vectorBaldes[i]->getProfundidadeLocal() << endl;
+        if (vectorBaldes[i]->getNumeroDePseudoChavesNoBalde() > 0)
+        {
+            cout << "Index do diretorio : " << i <<endl << "Pseudo-chaves : ";
+            
+            for (int j = 0; j < vectorBaldes[i]->getNumeroDePseudoChavesNoBalde(); j++)
+            {
+                 cout << vectorBaldes[i]->getPseudoChave(j) << " ";
+            }
+            cout << endl<< endl;
+        }
+        else
+        {
+            cout << "Index do diretorio : " << i <<endl << "Pseudo-chaves : ";
+            cout <<"Balde Vazio" <<endl<< endl;
+            
+        }
+    }
 }
 
 Balde Diretorio::getBalde(int indice)
